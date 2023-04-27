@@ -15,8 +15,7 @@ con.autocommit = False
 
 try:
     cur = con.cursor()
-    cur.execute("ALTER table stock DROP CONSTRAINT stock_depid_fkey")
-    cur.execute("UPDATE depot SET addr='dd1' WHERE depid='d1'")
+    cur.execute("UPDATE depot SET depid='dd1' WHERE depid='d1'")
     cur.execute("UPDATE Stock SET depid = 'dd1' WHERE depid ='d1'")
 
 except (Exception, psycopg2.DatabaseError) as err:
@@ -29,3 +28,6 @@ finally:
         con.commit()
         cur.close
         con.close
+        print('PostgreSQL connection is now closed')
+        
+print('End')
